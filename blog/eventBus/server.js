@@ -15,18 +15,22 @@ app.post("/events", async (req, res) => {
   console.log("Event Received:", event.type);
   events.push(event);
 
-  axios.post("http://localhost:5000/events", event).catch((err) => {
+  axios.post("http://posts-clusterip-srv:5000/events", event).catch((err) => {
     console.log(err.message);
   });
-  axios.post("http://localhost:5001/events", event).catch((err) => {
+  axios
+    .post("http://comments-clusterip-srv:5001/events", event)
+    .catch((err) => {
+      console.log(err.message);
+    });
+  axios.post("http://query-clusterip-srv:5002/events", event).catch((err) => {
     console.log(err.message);
   });
-  axios.post("http://localhost:5002/events", event).catch((err) => {
-    console.log(err.message);
-  });
-  axios.post("http://localhost:5003/events", event).catch((err) => {
-    console.log(err.message);
-  });
+  axios
+    .post("http://moderation-clusterip-srv:5003/events", event)
+    .catch((err) => {
+      console.log(err.message);
+    });
 
   res.send({ status: "OK" });
 });

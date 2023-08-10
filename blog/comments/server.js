@@ -24,7 +24,7 @@ app.post("/posts/:id/comments", async (req, res) => {
     : (comments[req.params.id] = [{ content, id, status: "pending" }]);
 
   await axios
-    .post("http://localhost:5005/events", {
+    .post("http://eventbus-srv:5005/events", {
       type: "CommentCreated",
       data: {
         id,
@@ -51,7 +51,7 @@ app.post("/events", async (req, res) => {
     );
     commentToModerate.status = status;
 
-    await axios.post("http://localhost:5005/events", {
+    await axios.post("http://eventbus-srv:5005/events", {
       type: "CommentUpdated",
       data: {
         id,

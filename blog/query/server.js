@@ -43,9 +43,11 @@ app.post("/events", async (req, res) => {
 app.listen(5002, async () => {
   console.log("query service is running on port 5002");
   try {
-    const res = await axios.get("http://localhost:5005/events").catch((err) => {
-      console.log("error");
-    });
+    const res = await axios
+      .get("http://eventbus-srv:5005/events")
+      .catch((err) => {
+        console.log("error");
+      });
 
     for (let event of res.data) {
       console.log(event);
