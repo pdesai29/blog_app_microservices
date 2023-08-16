@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <div className="container">
-        <h1>The Blog App</h1>
+        <h1>The Blog App!!!!</h1>
         <hr></hr>
         <PostCreate />
         <hr></hr>
